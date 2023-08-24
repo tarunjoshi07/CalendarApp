@@ -1,6 +1,6 @@
 package com.example.calendarapplication.di
 
-import com.example.calendarapplication.viewHolder.CalendarAppViewModel
+import com.example.calendarapplication.viewModel.CalendarAppViewModel
 import dagger.Component
 
 

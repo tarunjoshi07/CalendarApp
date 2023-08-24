@@ -10,7 +10,7 @@ import javax.inject.Singleton
 @Module
 class ApiModule {
 
-    private val BASE_URL = "http://dev.frndapp.in:8080/"
+    private val BASE_URL = "https://dev.frndapp.in:8080/"
 
     @Provides
     fun provideRetrofitObject(): Retrofit {
