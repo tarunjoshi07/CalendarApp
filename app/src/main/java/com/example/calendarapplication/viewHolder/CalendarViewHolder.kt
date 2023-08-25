@@ -23,6 +23,6 @@ class CalendarViewHolder (private val interaction: CalendarViewInteraction, priv
         this.day=day
         view.cellDayText.text=day
         if(isHighlighted)view.cellDayText.setTextColor(Color.parseColor("#EE4B2B"))
-        else view.cellDayText.setTextColor(ContextCompat.getColor(view.root.context, R.color.black))
+        else view.cellDayText.setTextColor(ContextCompat.getColor(view.root.context, R.color.teal_700))
     }
 }

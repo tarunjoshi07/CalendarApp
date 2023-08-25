@@ -12,6 +12,7 @@ import com.google.gson.Gson
 import com.google.gson.JsonObject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.lang.Exception
 
 import javax.inject.Inject
 
@@ -30,11 +31,15 @@ class CalendarAppViewModel:ViewModel() {
 
     fun storeCalendarTask(task: TaskDetail){
         viewModelScope.launch(Dispatchers.IO) {
-            val requestBody=getReqBodyForStoringTask(task)
-            val response=calendarAppRepository.storeCalendarTask(requestBody)
-            if(response.isSuccessful && response.body()!=null) {
-                taskStored.postValue(true)
-                getCalendarTaskList()
+            try {
+                val requestBody = getReqBodyForStoringTask(task)
+                val response = calendarAppRepository.storeCalendarTask(requestBody)
+                if (response.isSuccessful && response.body() != null) {
+                    taskStored.postValue(true)
+                    getCalendarTaskList()
+                }
+            }catch (e:Exception){
+
             }
         }
     }
@@ -57,11 +62,15 @@ class CalendarAppViewModel:ViewModel() {
 
     fun deleteCalendarTask(taskId:Int?){
         viewModelScope.launch(Dispatchers.IO) {
-            val requestBody=getReqBodyForDeletingTask(taskId)
-            val response=calendarAppRepository.deleteCalendarTask(requestBody)
-            if(response.isSuccessful && response.body()!=null) {
-                taskDeleted.postValue(true)
-                getCalendarTaskList()
+            try {
+                val requestBody = getReqBodyForDeletingTask(taskId)
+                val response = calendarAppRepository.deleteCalendarTask(requestBody)
+                if (response.isSuccessful && response.body() != null) {
+                    taskDeleted.postValue(true)
+                    getCalendarTaskList()
+                }
+            }catch (e:Exception){
+
             }
         }
     }
@@ -77,10 +86,14 @@ class CalendarAppViewModel:ViewModel() {
 
     fun getCalendarTaskList(){
         viewModelScope.launch(Dispatchers.IO) {
-            val requestBody=getReqBodyForTaskList(userId)
-            val response=calendarAppRepository.getCalendarTaskList(requestBody)
-            if(response.isSuccessful && response.body()!=null) {
-                taskList.postValue(response.body())
+            try {
+                val requestBody = getReqBodyForTaskList(userId)
+                val response = calendarAppRepository.getCalendarTaskList(requestBody)
+                if (response.isSuccessful && response.body() != null) {
+                    taskList.postValue(response.body())
+                }
+            }catch (e:Exception){
+
             }
         }
     }

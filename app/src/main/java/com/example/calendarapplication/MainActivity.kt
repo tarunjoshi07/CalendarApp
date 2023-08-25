@@ -25,16 +25,12 @@ class MainActivity : AppCompatActivity() {
         DataBindingUtil.setContentView(this, R.layout.activity_main)
     }
 
-    val tabArray = arrayOf(
-        "Calendar",
-        "My Tasks",
-    )
+    private val tabArray = arrayOf("Calendar", "My Tasks",)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setUpViewPager()
         setUpTabLayout()
-//        setUpClickListener()
     }
 
     private fun setUpTabLayout() {
