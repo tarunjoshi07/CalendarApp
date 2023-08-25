@@ -85,7 +85,7 @@
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:text=""
-        android:maxLength="200"
+        android:maxLength="150"
         android:textSize="14sp"
         app:layout_constraintTop_toBottomOf="@+id/titleText"
         app:layout_constraintEnd_toEndOf="parent"
