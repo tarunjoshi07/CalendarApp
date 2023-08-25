@@ -12,6 +12,7 @@
         android:usesCleartextTraffic="true"
         android:theme="@style/Theme.CalendarApplication">
         <activity
+            android:windowSoftInputMode="adjustPan"
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
