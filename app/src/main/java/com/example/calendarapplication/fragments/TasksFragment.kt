@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -32,7 +33,7 @@ class TasksFragment : Fragment(), RecyclerViewInteraction {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.getCalendarTaskList(550)
+        viewModel.getCalendarTaskList()
         setUpRecyclerView()
         setUpObservables()
     }
@@ -43,17 +44,22 @@ class TasksFragment : Fragment(), RecyclerViewInteraction {
                 myTasksAdapter.setTasks(it)
             }
         })
+
+        viewModel.taskDeleted.observe(viewLifecycleOwner,{
+            if(it==true) {
+                Toast.makeText(requireContext(), "Task is Deleted", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
     private fun setUpRecyclerView() {
         binding?.taskRecyclerView?.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = myTasksAdapter
-            addItemDecoration(DividerItemDecoration(this.context, DividerItemDecoration.VERTICAL))
         }
     }
 
     override fun onTaskClicked(task: Task) {
-        viewModel.deleteCalendarTask(550,task.taskId)
+        viewModel.deleteCalendarTask(task.taskId)
     }
 }

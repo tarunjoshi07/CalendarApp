@@ -22,7 +22,7 @@ class CalendarAdapter(private val interaction: CalendarViewInteraction):
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CalendarViewHolder {
         val view: CalendarCellBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.calendar_cell, parent, false)
         val layoutParams: ViewGroup.LayoutParams = view.root.layoutParams
-        layoutParams.height = (parent.height * 0.166666666).toInt()
+        layoutParams.height = (parent.height * 0.15).toInt()
         return CalendarViewHolder(interaction, view)
     }
 

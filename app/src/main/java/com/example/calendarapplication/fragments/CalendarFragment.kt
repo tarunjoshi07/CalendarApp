@@ -5,16 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.calendarapplication.*
 import com.example.calendarapplication.adapter.CalendarAdapter
-import com.example.calendarapplication.dataModels.Task
 import com.example.calendarapplication.dataModels.TaskDetail
 import com.example.calendarapplication.databinding.FragmentCalendarBinding
 import com.example.calendarapplication.intrectionInterface.CalendarViewInteraction
 import com.example.calendarapplication.viewModel.CalendarAppViewModel
-import java.time.Duration
 import java.time.LocalDate
 import java.time.YearMonth
 import java.util.ArrayList
@@ -38,6 +37,7 @@ class CalendarFragment : Fragment(),CalendarViewInteraction {
         super.onViewCreated(view, savedInstanceState)
         setUpViews()
         setUpOnClickListener()
+        setUpObservable()
         setUpRecyclerView()
         setCalenderView()
     }
@@ -46,6 +46,13 @@ class CalendarFragment : Fragment(),CalendarViewInteraction {
         selectedDate?.let {
             selectedDay = dayFromDate(it)
         }
+    }
+    private fun setUpObservable(){
+        viewModel.taskStored.observe(viewLifecycleOwner,{
+            if(it==true) {
+                Toast.makeText(requireContext(), "Task is added", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
     private fun setUpOnClickListener(){
         binding?.calendarLayout?.prevMonth?.setOnClickListener {
@@ -109,18 +116,18 @@ class CalendarFragment : Fragment(),CalendarViewInteraction {
     }
 
     private fun saveNewTask(){
-        var title=binding?.newTaskLayout?.titleText?.text.toString()
-        var desc=binding?.newTaskLayout?.descText?.text.toString()
-        var taskDate=binding?.newTaskLayout?.dateText?.text.toString()
-        var currentDate= getCurrentDate()
+        val title=binding?.newTaskLayout?.titleText?.text.toString()
+        val desc=binding?.newTaskLayout?.descText?.text.toString()
+        val taskDate=binding?.newTaskLayout?.dateText?.text.toString()
+        val currentDate= getCurrentDate()
         if(title.isNotEmpty() && desc.isNotEmpty()) {
-            var task = TaskDetail(
+            val task = TaskDetail(
                 title = title,
                 description = desc,
                 createdDate = currentDate,
                 taskDate = taskDate
             )
-            viewModel.storeCalendarTask(550,task)
+            viewModel.storeCalendarTask(task)
             resetFields()
         }
         else{

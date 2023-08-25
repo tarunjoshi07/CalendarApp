@@ -13,6 +13,7 @@ import com.example.calendarapplication.databinding.ActivityMainBinding
 import com.example.calendarapplication.fragments.CalendarFragment
 import com.example.calendarapplication.fragments.TasksFragment
 import com.example.calendarapplication.viewModel.CalendarAppViewModel
+import com.google.android.material.tabs.TabLayoutMediator
 import java.time.LocalDate
 import java.util.ArrayList
 
@@ -24,10 +25,24 @@ class MainActivity : AppCompatActivity() {
         DataBindingUtil.setContentView(this, R.layout.activity_main)
     }
 
+    val tabArray = arrayOf(
+        "Calendar",
+        "My Tasks",
+    )
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setUpViewPager()
-        setUpClickListener()
+        setUpTabLayout()
+//        setUpClickListener()
+    }
+
+    private fun setUpTabLayout() {
+        if (mainView?.tabLayout != null && mainView?.viewPager2 != null) {
+            TabLayoutMediator(mainView?.tabLayout!!, mainView?.viewPager2!!) { tab, position ->
+                tab.text = tabArray[position]
+            }.attach()
+        }
     }
 
     private fun setUpViewPager(){
@@ -38,14 +53,5 @@ class MainActivity : AppCompatActivity() {
             adapter=myAdapter
             orientation = ViewPager2.ORIENTATION_HORIZONTAL
         }
-    }
-
-    private fun setUpClickListener(){
-        mainView?.calendarLayout?.setOnClickListener(View.OnClickListener {
-            mainView?.viewPager2?.currentItem=0
-        })
-        mainView?.tasksLayout?.setOnClickListener(View.OnClickListener {
-            mainView?.viewPager2?.currentItem=1
-        })
     }
 }

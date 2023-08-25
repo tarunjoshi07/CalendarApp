@@ -23,22 +23,23 @@ class CalendarAppViewModel:ViewModel() {
         DaggerApiComponent.create().inject(this)
     }
 
+    private val userId=550
     var taskStored=MutableLiveData<Boolean?>()
     var taskDeleted=MutableLiveData<Boolean?>()
     var taskList=MutableLiveData<CalendarTaskListResponse?>()
 
-    fun storeCalendarTask(userId:Int,task: TaskDetail){
+    fun storeCalendarTask(task: TaskDetail){
         viewModelScope.launch(Dispatchers.IO) {
-            val requestBody=getReqBodyForStoringTask(userId,task)
+            val requestBody=getReqBodyForStoringTask(task)
             val response=calendarAppRepository.storeCalendarTask(requestBody)
             if(response.isSuccessful && response.body()!=null) {
                 taskStored.postValue(true)
-                getCalendarTaskList(userId)
+                getCalendarTaskList()
             }
         }
     }
 
-    private fun getReqBodyForStoringTask(userId:Int, task: TaskDetail):JsonObject{
+    private fun getReqBodyForStoringTask(task: TaskDetail):JsonObject{
         var requestBody=JsonObject()
         var taskJson=JsonObject()
         taskJson.apply {
@@ -54,18 +55,18 @@ class CalendarAppViewModel:ViewModel() {
         return requestBody
     }
 
-    fun deleteCalendarTask(userId:Int,taskId:Int?){
+    fun deleteCalendarTask(taskId:Int?){
         viewModelScope.launch(Dispatchers.IO) {
-            val requestBody=getReqBodyForDeletingTask(userId,taskId)
+            val requestBody=getReqBodyForDeletingTask(taskId)
             val response=calendarAppRepository.deleteCalendarTask(requestBody)
             if(response.isSuccessful && response.body()!=null) {
                 taskDeleted.postValue(true)
-                getCalendarTaskList(userId)
+                getCalendarTaskList()
             }
         }
     }
 
-    private fun getReqBodyForDeletingTask(userId:Int, taskId:Int?):JsonObject{
+    private fun getReqBodyForDeletingTask(taskId:Int?):JsonObject{
         var requestBody=JsonObject()
         requestBody.apply {
             addProperty("user_id",userId)
@@ -74,7 +75,7 @@ class CalendarAppViewModel:ViewModel() {
         return requestBody
     }
 
-    fun getCalendarTaskList(userId:Int){
+    fun getCalendarTaskList(){
         viewModelScope.launch(Dispatchers.IO) {
             val requestBody=getReqBodyForTaskList(userId)
             val response=calendarAppRepository.getCalendarTaskList(requestBody)

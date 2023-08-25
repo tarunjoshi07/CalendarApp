@@ -6,10 +6,12 @@
         <entry key="../../../../layout/custom_preview.xml" value="0.16203703703703703" />
         <entry key="../../Library/Android/sdk/platforms/android-33/data/res/layout/activity_list_item.xml" value="0.23802083333333332" />
         <entry key="app/src/main/res/drawable/boder.xml" value="1.4409058858757737" />
+        <entry key="app/src/main/res/drawable/ic_delete.xml" value="0.15833333333333333" />
+        <entry key="app/src/main/res/drawable/rounded_edges.xml" value="0.15833333333333333" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/boder.xml" value="0.1203125" />
         <entry key="app/src/main/res/layout/calendar_cell.xml" value="0.23802083333333332" />
-        <entry key="app/src/main/res/layout/calendar_layout.xml" value="0.1783958623377322" />
+        <entry key="app/src/main/res/layout/calendar_layout.xml" value="0.55" />
         <entry key="app/src/main/res/layout/custom_calendar_day.xml" value="0.23802083333333332" />
         <entry key="app/src/main/res/layout/fragment_calendar.xml" value="0.22880108736301277" />
         <entry key="app/src/main/res/layout/fragment_tasks.xml" value="0.23802083333333332" />
@@ -27,7 +29,7 @@
   <component name="VisualizationToolProject">
     <option name="state">
       <ProjectState>
-        <option name="scale" value="0.23802083333333332" />
+        <option name="scale" value="0.55" />
       </ProjectState>
     </option>
   </component>
