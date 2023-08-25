@@ -9,5 +9,36 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <include
+            android:id="@+id/calendarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            layout="@layout/calendar_layout"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/calendarRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:paddingTop="10dp"
+            android:layout_marginHorizontal="10dp"
+            android:background="@drawable/boder"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/calendarLayout">
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <include
+            android:id="@+id/newTaskLayout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="30dp"
+            layout="@layout/new_task_layout"
+            app:layout_constraintTop_toBottomOf="@+id/calendarRecyclerView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

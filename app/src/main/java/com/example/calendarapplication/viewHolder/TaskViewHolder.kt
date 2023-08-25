@@ -19,8 +19,8 @@ class TaskViewHolder(private val interaction: RecyclerViewInteraction, private v
     }
     fun bind(task: Task){
         this.task=task
-        view.taskTitle.text=task.taskDetail?.title
-        view.taskDesc.text=task.taskDetail?.description
-        view.taskDate.text=task.taskDetail?.taskDate
+        view.taskTitle.text="Title : ${task.taskDetail?.title}"
+        view.taskDesc.text= "Desc : ${task.taskDetail?.description}"
+        view.taskDate.text= "Date : ${task.taskDetail?.taskDate}"
     }
 }

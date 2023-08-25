@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.calendarapplication.adapter.MyTasksAdapter
 import com.example.calendarapplication.intrectionInterface.RecyclerViewInteraction
 import com.example.calendarapplication.dataModels.Task
-import com.example.calendarapplication.dataModels.TaskDetail
 import com.example.calendarapplication.databinding.FragmentTasksBinding
 import com.example.calendarapplication.viewModel.CalendarAppViewModel
 
@@ -26,9 +25,9 @@ class TasksFragment : Fragment(), RecyclerViewInteraction {
     private var binding: FragmentTasksBinding?=null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View{
-         binding= FragmentTasksBinding.inflate(inflater, container, false)
-        return binding!!.root
+    ): View?{
+        binding= FragmentTasksBinding.inflate(inflater, container, false)
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -36,15 +35,6 @@ class TasksFragment : Fragment(), RecyclerViewInteraction {
         viewModel.getCalendarTaskList(550)
         setUpRecyclerView()
         setUpObservables()
-        saveData()
-    }
-
-    fun saveData(){
-        var task=TaskDetail()
-        task.title="tatu"
-        task.description="papi guu khata hai"
-        task.taskDate="24-08-2022"
-        viewModel.storeCalendarTask(550,task)
     }
 
     private fun  setUpObservables(){

@@ -1,4 +1,8 @@
 package com.example.calendarapplication.intrectionInterface
 
-interface CalenderViewInteraction {
+import com.example.calendarapplication.dataModels.Task
+
+interface CalendarViewInteraction {
+
+    fun onCellClicked(position:Int,dayText:String)
 }
