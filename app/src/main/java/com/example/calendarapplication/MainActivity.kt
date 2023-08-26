@@ -3,7 +3,9 @@ package com.example.calendarapplication
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -31,6 +33,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setUpViewPager()
         setUpTabLayout()
+        setUpObservable()
+    }
+
+    private  fun setUpObservable(){
+        viewModel.showError?.observe(this, {
+            if(it==true){
+                Toast.makeText(this,"Something went wrong",Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
     private fun setUpTabLayout() {

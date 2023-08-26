@@ -27,6 +27,7 @@ class CalendarAppViewModel:ViewModel() {
     private val userId=550
     var taskStored=MutableLiveData<Boolean?>()
     var taskDeleted=MutableLiveData<Boolean?>()
+    var showError=MutableLiveData<Boolean?>()
     var taskList=MutableLiveData<CalendarTaskListResponse?>()
 
     fun storeCalendarTask(task: TaskDetail){
@@ -37,9 +38,11 @@ class CalendarAppViewModel:ViewModel() {
                 if (response.isSuccessful && response.body() != null) {
                     taskStored.postValue(true)
                     getCalendarTaskList()
+                }else{
+                    showError.postValue(true)
                 }
             }catch (e:Exception){
-
+                showError.postValue(true)
             }
         }
     }
@@ -68,9 +71,11 @@ class CalendarAppViewModel:ViewModel() {
                 if (response.isSuccessful && response.body() != null) {
                     taskDeleted.postValue(true)
                     getCalendarTaskList()
+                }else{
+                    showError.postValue(true)
                 }
             }catch (e:Exception){
-
+                showError.postValue(true)
             }
         }
     }

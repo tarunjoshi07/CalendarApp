@@ -50,6 +50,7 @@ class CalendarFragment : Fragment(),CalendarViewInteraction {
         viewModel.taskStored.observe(viewLifecycleOwner,{
             if(it==true) {
                 Toast.makeText(requireContext(), "Task is added", Toast.LENGTH_SHORT).show()
+                resetFields()
             }
         })
     }
@@ -127,7 +128,6 @@ class CalendarFragment : Fragment(),CalendarViewInteraction {
                 taskDate = taskDate
             )
             viewModel.storeCalendarTask(task)
-            resetFields()
         }
         else{
             Toast.makeText(requireContext(),"title or desc is empty",Toast.LENGTH_SHORT).show()
