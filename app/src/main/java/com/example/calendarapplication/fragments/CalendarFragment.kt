@@ -111,8 +111,10 @@ class CalendarFragment : Fragment(),CalendarViewInteraction {
     }
 
     override fun onCellClicked(position: Int, dayText: String) {
-        selectedDay=dayText
-        setCalenderView()
+        if(dayText.isNotEmpty()) {
+            selectedDay = dayText
+            setCalenderView()
+        }
     }
 
     private fun saveNewTask(){
