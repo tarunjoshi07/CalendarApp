@@ -33,9 +33,9 @@ class TasksFragment : Fragment(), RecyclerViewInteraction {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.getCalendarTaskList()
         setUpRecyclerView()
         setUpObservables()
+        viewModel.getCalendarTaskList()
     }
 
     private fun  setUpObservables(){
